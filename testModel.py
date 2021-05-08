@@ -26,8 +26,8 @@ def testModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, SOCIAL_
     # Make results reproducible
     torch.backends.cudnn.deterministic = True
 
-    NUM_WORKERS = 1  # Number of processes in charge of preprocessing batches
-    DATA_PARALLEL = False
+    NUM_WORKERS = 8  # Number of processes in charge of preprocessing batches
+    DATA_PARALLEL = True
     CUDA_DEVICE = 0
     if DATA_PARALLEL:
         DEVICE = torch.device("cuda")

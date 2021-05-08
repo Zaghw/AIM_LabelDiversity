@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
 
     # Preprocessed Images Paths
-    PREPROCESSED_FOLDER_PATH = DATASETS_PATH + "Preprocessed-" + str(MARGIN) + "/"
+    PREPROCESSED_FOLDER_PATH = DATASETS_PATH + "UTKFace-Preprocessed-" + str(MARGIN) + "/"
     PREPROCESSED_IMAGES_PATH = PREPROCESSED_FOLDER_PATH + "Images/"
     PREPROCESSED_CSV_PATH = PREPROCESSED_FOLDER_PATH + "CSVs/"
 
@@ -35,7 +35,6 @@ if __name__ == "__main__":
             OUT_PATH = "../TrainedModels/" + OUTPUT_FOLDER_NAME + "/"
 
             validLoss = trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
-            # print("Margin: ", Margin, " returned Validation Cost: ", validCost)
             age_mae = testModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, SOCIAL_MEDIA_SEGMENTS, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
 
             if age_mae < best_age_mae or best_age_mae == -1:

@@ -29,8 +29,8 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
     RANDOM_SEED = 1
 
     # GPU settings
-    NUM_WORKERS = 1  # Number of processes in charge of preprocessing batches
-    DATA_PARALLEL = False
+    NUM_WORKERS = 8  # Number of processes in charge of preprocessing batches
+    DATA_PARALLEL = True
     CUDA_DEVICE = 0
     if torch.cuda.is_available():
         if DATA_PARALLEL:
@@ -47,7 +47,7 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
     EARLY_STOPPING_PATIENCE = 30
     LEARNING_RATE = 0.0005
     NUM_EPOCHS = 10000
-    BATCH_SIZE = 64
+    BATCH_SIZE = 256
 
 
     ##########################
