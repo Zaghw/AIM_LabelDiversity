@@ -1,6 +1,7 @@
 import torch
 import numpy as np
 import xlsxwriter
+import math
 
 def compute_summarized_stats(model, age_loss_fn, data_loader, device):
 
@@ -59,9 +60,9 @@ def compute_detailed_stats(model, data_loader, device, SOCIAL_MEDIA_SEGMENTS):
         cumul_sq_error += torch.sum((age_preds - age_labels)**2)
         cumul_correct_count += torch.sum(correct_age_preds)
 
-    age_mae = cumul_abs_error.float() / num_examples
-    age_mse = cumul_sq_error.float() / num_examples
-    age_seg_acc = cumul_correct_count.float() / num_examples
+    age_mae = cumul_abs_error.item() / num_examples
+    age_mse = cumul_sq_error.item() / num_examples
+    age_seg_acc = cumul_correct_count.item() / num_examples
 
     for i in range(len(SOCIAL_MEDIA_SEGMENTS) + 1):
         age_stats[i]["precision"] = age_stats[i]["true_positives"] / (age_stats[i]["true_positives"] + age_stats[i]["false_positives"])
@@ -100,7 +101,7 @@ def writeStatsToExcel(SOCIAL_MEDIA_SEGMENTS, OUTPUT_FILENAME ,age_mae, age_mse, 
     worksheet.write(row, col + 2, "Age MAE:")
     worksheet.write(row, col + 3, age_mae)
     worksheet.write(row, col + 4, "Age RMSE:")
-    worksheet.write(row, col + 5, torch.sqrt(age_mse))
+    worksheet.write(row, col + 5, math.sqrt(age_mse))
     row += 2
 
     # Close xlsx

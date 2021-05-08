@@ -45,7 +45,7 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
 
 
     # Hyperparameters
-    EARLY_STOPPING_PATIENCE = 30
+    EARLY_STOPPING_PATIENCE = 10
     LEARNING_RATE = 0.0005
     NUM_EPOCHS = 10000
     BATCH_SIZE = 256
@@ -169,7 +169,7 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
             valid_mae, valid_mse, valid_loss = compute_summarized_stats(model, age_loss_fn, valid_loader, DEVICE)
 
         if valid_loss < best_valid_loss or best_valid_loss == -1:
-            best_mae, best_rmse, best_epoch, best_valid_cost = valid_mae, math.sqrt(valid_mse), epoch + 1, valid_loss
+            best_mae, best_rmse, best_epoch, best_valid_loss = valid_mae, math.sqrt(valid_mse), epoch + 1, valid_loss
             early_stop_counter = 0
 
             ########## SAVE MODEL #############
