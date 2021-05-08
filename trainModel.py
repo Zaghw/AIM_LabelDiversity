@@ -5,6 +5,7 @@ import numpy as np
 import numpy.random as random
 import torch.nn as nn
 import sys
+import math
 from torch.utils.data import DataLoader
 from torchvision import transforms
 
@@ -168,7 +169,7 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
             valid_mae, valid_mse, valid_loss = compute_summarized_stats(model, age_loss_fn, valid_loader, DEVICE)
 
         if valid_loss < best_valid_loss or best_valid_loss == -1:
-            best_mae, best_rmse, best_epoch, best_valid_cost = valid_mae, torch.sqrt(valid_mse), epoch + 1, valid_loss
+            best_mae, best_rmse, best_epoch, best_valid_cost = valid_mae, math.sqrt(valid_mse), epoch + 1, valid_loss
             early_stop_counter = 0
 
             ########## SAVE MODEL #############
@@ -201,34 +202,34 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
 
     return best_valid_loss
 
-if __name__ == "__main__":
-
-    # Training Variables
-    MARGIN = 25
-    RESNET_SIZE = "ResNet34"  # "ResNet34" or "ResNet50" or "ResNet101" or "ResNet152"
-    MIN_AGE = 13  # Inclusive
-    MAX_AGE = 116  # Inclusive
-    M = 5   # Number of different bin configurations
-    L = 10  # Number of bins in each configuration
-    SOCIAL_MEDIA_SEGMENTS = np.array([25, 35, 50])  # (MIN_AGE,24), (25,34), (35,49), (50,MAX_AGE)
-
-    # Raw Images Paths
-    DATASETS_PATH = "../Datasets/"
-
-
-    # Preprocessed Images Paths
-    PREPROCESSED_FOLDER_PATH = DATASETS_PATH + "Preprocessed-" + str(MARGIN) + "/"
-    PREPROCESSED_IMAGES_PATH = PREPROCESSED_FOLDER_PATH + "Images/"
-    PREPROCESSED_CSV_PATH = PREPROCESSED_FOLDER_PATH + "CSVs/"
-
-
-    # Output Path
-    OUTPUT_FOLDER_NAME = "LabelDiversity-" + RESNET_SIZE + "-" + str(M) + "X" + str(L)
-    OUT_PATH = "../TrainedModels/" + OUTPUT_FOLDER_NAME + "/"
-
-
-    # preprocessDataset(MARGIN, DATASETS_PATH, PREPROCESSED_FOLDER_PATH, PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH)
-    # distributeDatset(PREPROCESSED_CSV_PATH, MIN_AGE, MAX_AGE, SOCIAL_MEDIA_SEGMENTS)
-    validLoss = trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
-    # print("Margin: ", Margin, " returned Validation Cost: ", validCost)
-    # testModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, SOCIAL_MEDIA_SEGMENTS, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
+# if __name__ == "__main__":
+#
+#     # Training Variables
+#     MARGIN = 25
+#     RESNET_SIZE = "ResNet34"  # "ResNet34" or "ResNet50" or "ResNet101" or "ResNet152"
+#     MIN_AGE = 13  # Inclusive
+#     MAX_AGE = 116  # Inclusive
+#     M = 5   # Number of different bin configurations
+#     L = 10  # Number of bins in each configuration
+#     SOCIAL_MEDIA_SEGMENTS = np.array([25, 35, 50])  # (MIN_AGE,24), (25,34), (35,49), (50,MAX_AGE)
+#
+#     # Raw Images Paths
+#     DATASETS_PATH = "../Datasets/"
+#
+#
+#     # Preprocessed Images Paths
+#     PREPROCESSED_FOLDER_PATH = DATASETS_PATH + "Preprocessed-" + str(MARGIN) + "/"
+#     PREPROCESSED_IMAGES_PATH = PREPROCESSED_FOLDER_PATH + "Images/"
+#     PREPROCESSED_CSV_PATH = PREPROCESSED_FOLDER_PATH + "CSVs/"
+#
+#
+#     # Output Path
+#     OUTPUT_FOLDER_NAME = "LabelDiversity-" + RESNET_SIZE + "-" + str(M) + "X" + str(L)
+#     OUT_PATH = "../TrainedModels/" + OUTPUT_FOLDER_NAME + "/"
+#
+#
+#     # preprocessDataset(MARGIN, DATASETS_PATH, PREPROCESSED_FOLDER_PATH, PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH)
+#     # distributeDatset(PREPROCESSED_CSV_PATH, MIN_AGE, MAX_AGE, SOCIAL_MEDIA_SEGMENTS)
+#     validLoss = trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
+#     # print("Margin: ", Margin, " returned Validation Cost: ", validCost)
+#     # testModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, SOCIAL_MEDIA_SEGMENTS, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
