@@ -189,7 +189,7 @@ def trainModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, RESNET
 
         s = 'STATS: | Current Valid: MAE=%.4f,MSE=%.4f, VALID_LOSS=%.4f, EPOCH=%d | ' \
             'Best Valid :MAE=%.4f,MSE=%.4f, VALID_LOSS=%.4f, EPOCH=%d | LAST IMPROVEMENT=%d EPOCHS' % (
-            valid_mae, torch.sqrt(valid_mse), valid_loss, epoch + 1, best_mae,
+            valid_mae, math.sqrt(valid_mse), valid_loss, epoch + 1, best_mae,
             best_rmse, best_valid_loss, best_epoch + 1, early_stop_counter)
         print(s)
         with open(LOGFILE, 'a') as f:
