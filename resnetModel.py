@@ -31,7 +31,7 @@ class ResNet(nn.Module):
         # Age output
         age_preds_matrices = torch.zeros(size=(x.shape[0], M, L)).to(x.device)
         for linearIndex, m in enumerate(self.linears):
-            pred = torch.sigmoid(m(x))
+            pred = torch.softmax(m(x), dim=1)
             for imageIndex in range(x.shape[0]):
                 age_preds_matrices[imageIndex, linearIndex] = pred[imageIndex]
 
