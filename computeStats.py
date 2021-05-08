@@ -44,8 +44,8 @@ def compute_detailed_stats(model, data_loader, device, SOCIAL_MEDIA_SEGMENTS):
         age_preds, age_preds_matrices = model(images)
 
         # Get Age Segments from Age Labels and Predictions
-        age_labels_segments = torch.from_numpy(np.digitize(age_labels, SOCIAL_MEDIA_SEGMENTS))
-        age_preds_segments = torch.from_numpy(np.digitize(age_preds, SOCIAL_MEDIA_SEGMENTS))
+        age_labels_segments = torch.from_numpy(np.digitize(age_labels.cpu(), SOCIAL_MEDIA_SEGMENTS))
+        age_preds_segments = torch.from_numpy(np.digitize(age_preds.cpu(), SOCIAL_MEDIA_SEGMENTS))
 
         # Get True Positives, False Positives, and False Negatives
         for j in range(len(SOCIAL_MEDIA_SEGMENTS) + 1):
