@@ -40,5 +40,6 @@ if __name__ == "__main__":
             if age_mae < best_age_mae or best_age_mae == -1:
                 best_age_mae = validLoss
                 best_ML = (M, L)
-                print("Current ML:\t", (M, L), "\tCurrent MAE:\t", age_mae)
-                print("Best ML:\t", best_ML, "\tBest MAE:\t", best_age_mae)
+
+            print("Current ML:\t", (M, L), "\tCurrent MAE:\t", age_mae)
+            print("Best ML:\t", best_ML, "\tBest MAE:\t", best_age_mae)
