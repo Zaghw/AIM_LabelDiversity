@@ -105,7 +105,7 @@ def testModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, SOCIAL_
         # writeStatsToExcel(SOCIAL_MEDIA_SEGMENTS, OUT_PATH + 'TestRes.xlsx', age_mae, age_mse, age_seg_acc, age_stats)
         # print("Finished!")
 
-    return age_mae
+    # return age_mae
 
 
 

@@ -91,9 +91,15 @@ def writeStatsToExcel(SOCIAL_MEDIA_SEGMENTS, OUTPUT_FILENAME ,age_mae, age_mse, 
     # Write Age Results
     for i in range(len(SOCIAL_MEDIA_SEGMENTS) + 1):
         worksheet.write(row, col, "CLASS" + str(i) + ":")
-        worksheet.write(row, col + 1, age_stats[i]["precision"].__float__())
+        try:
+            worksheet.write(row, col + 1, age_stats[i]["precision"].__float__())
+        except:
+            pass
         worksheet.write(row, col + 2, age_stats[i]["recall"].__float__())
-        worksheet.write(row, col + 3, age_stats[i]["f1_score"].__float__())
+        try:
+            worksheet.write(row, col + 3, age_stats[i]["f1_score"].__float__())
+        except:
+            pass
         worksheet.write(row, col + 4, age_stats[i]["total_count"].__float__())
         row += 1
     worksheet.write(row, col, "Age Acc:")
