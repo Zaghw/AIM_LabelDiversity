@@ -38,7 +38,7 @@ if __name__ == "__main__":
             age_mae = testModel(PREPROCESSED_IMAGES_PATH, PREPROCESSED_CSV_PATH, OUT_PATH, SOCIAL_MEDIA_SEGMENTS, RESNET_SIZE, MIN_AGE, MAX_AGE, M, L)
 
             if age_mae < best_age_mae or best_age_mae == -1:
-                best_age_mae = validLoss
+                best_age_mae = age_mae
                 best_ML = (M, L)
 
             print("Current ML:\t", (M, L), "\tCurrent MAE:\t", age_mae)
